@@ -20,6 +20,18 @@ Permanent highlights and comments for Claude and ChatGPT conversations. Keyboard
 
 <!-- VIDEO: on github.com, edit this file and drag the intro video in here. GitHub turns it into an inline player. -->
 
+
+
+
+
+
+https://github.com/user-attachments/assets/9e063722-7f78-481d-9c87-215019b1ce26
+
+https://github.com/user-attachments/assets/88777f0e-7cb9-4302-aada-8811f82a5575
+
+
+
+
 | Highlight and comment | Keyboard navigation |
 | --- | --- |
 | <img src="docs/media/highlight-comment.gif" alt="Highlighting a passage and adding a comment" width="420"> | <img src="docs/media/keyboard.gif" alt="Jumping between highlights with the keyboard" width="420"> |
