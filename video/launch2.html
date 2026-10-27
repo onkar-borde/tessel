@@ -1,0 +1,307 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Launch video</title>
+<style>
+:root{--bg:#1b1a18;--panel:#262522;--ink:#f1eee8;--mut:#a29d93;--acc:#c96442;--line:#3a3834}
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.scene{position:absolute;inset:0;opacity:0}
+.cap{position:absolute;left:0;right:0;bottom:70px;text-align:center;font-size:44px;font-weight:600;letter-spacing:-.01em}
+.cap small{display:block;font-size:26px;font-weight:400;color:var(--mut);margin-top:10px}
+.win{position:absolute;left:360px;top:90px;width:1200px;height:760px;background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.55);overflow:hidden}
+.bar{height:56px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 22px;color:var(--mut);font-size:20px}
+.bar i{width:13px;height:13px;border-radius:50%;background:#4a4742;display:block}
+.chat{padding:40px 64px;font-size:29px;line-height:1.62;color:#e8e4dc;position:relative}
+.chat .you{background:#33312d;border-radius:18px;padding:16px 24px;display:inline-block;margin-bottom:30px;font-size:26px;color:#d6d1c7}
+.hl{border-radius:5px;padding:2px 0}
+.kbd{position:absolute;display:flex;gap:10px}
+.key{min-width:76px;height:76px;padding:0 20px;border-radius:16px;background:#33312d;border:2px solid #5a564f;border-bottom-width:6px;display:grid;place-items:center;font-size:34px;font-weight:700}
+.tb{position:absolute;display:flex;gap:12px;align-items:center;background:#2e2c29;border:1px solid #4a4742;border-radius:999px;padding:10px 16px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.dot{width:36px;height:36px;border-radius:50%}
+.pop{position:absolute;width:520px;background:#2e2c29;border:1px solid #4a4742;border-radius:18px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.5);font-size:24px}
+.pop .q{border-left:5px solid #ffd500;padding-left:14px;color:var(--mut);font-size:22px}
+.pop .ta{margin-top:16px;border:1px solid #4a4742;background:#1f1e1c;border-radius:12px;min-height:88px;padding:14px;font-size:24px}
+.badge{position:absolute;width:34px;height:34px;border-radius:50%;background:var(--acc);display:grid;place-items:center}
+.panel{position:absolute;top:90px;right:70px;width:430px;height:760px;background:#2e2c29;border:1px solid #4a4742;border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.55);padding:26px;font-size:23px}
+.panel h4{font-size:26px;margin-bottom:18px}
+.item{display:flex;gap:14px;padding:14px;border-radius:14px;margin-bottom:10px;border:1px solid transparent;color:#d9d4c9}
+.item.on{background:#3a3733;border-color:#6a655d}
+.item b{width:10px;border-radius:5px;flex:none}
+.lib{position:absolute;left:260px;top:90px;width:1400px;height:780px;background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.55);display:flex;overflow:hidden}
+.rail{width:310px;border-right:1px solid var(--line);padding:30px 24px;font-size:24px;color:#d9d4c9}
+.rail div{padding:12px 14px;border-radius:12px;margin-bottom:6px;display:flex;justify-content:space-between}
+.rail .sel{background:#3a3733}
+.main{flex:1;padding:30px 34px}
+.search{height:64px;border:1px solid #4a4742;border-radius:14px;background:#1f1e1c;padding:0 22px;display:flex;align-items:center;font-size:26px;margin-bottom:22px}
+.card{border:1px solid var(--line);background:#2b2a27;border-radius:16px;padding:20px 24px;margin-bottom:16px;position:relative}
+.card h5{font-size:24px;margin-bottom:8px;display:flex;gap:12px;align-items:center}
+.pill{font-size:17px;padding:3px 12px;border-radius:999px;background:#3a3733;color:#d9d4c9;font-weight:500}
+.card p{color:var(--mut);font-size:22px;border-left:5px solid;padding-left:14px;margin-top:6px}
+.share{position:absolute;left:300px;top:100px;width:1320px;height:740px;background:#f7f4ee;color:#222;border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.55);overflow:hidden}
+.share .top{height:84px;background:#fff;border-bottom:1px solid #e4dfd5;display:flex;align-items:center;gap:36px;padding:0 40px;font-size:24px}
+.sw{width:64px;height:36px;border-radius:999px;background:#c96442;position:relative;display:inline-block;vertical-align:middle;margin-right:12px}
+.sw::after{content:"";position:absolute;top:4px;width:28px;height:28px;border-radius:50%;background:#fff;left:32px;transition:none}
+.sw.off{background:#bdb8ad}.sw.off::after{left:4px}
+.share .body{padding:40px 70px;font-size:29px;line-height:1.65}
+.bigtxt{position:absolute;left:0;right:0;text-align:center}
+.cursor{position:absolute;width:34px;height:34px;z-index:50;filter:drop-shadow(0 3px 6px rgba(0,0,0,.5))}
+</style></head><body>
+<div id="stage">
+
+
+<!-- S0 problem -->
+<div class="scene" id="s0">
+  <div id="titles" style="position:absolute;left:0;right:0;top:0;bottom:0;opacity:.5"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(27,26,24,.96) 30%,rgba(27,26,24,.6) 100%)"></div>
+  <div class="bigtxt" style="top:330px;font-size:78px;font-weight:700;letter-spacing:-.02em;line-height:1.15;padding:0 200px" id="q1">You have had hundreds of useful AI conversations.</div>
+  <div class="bigtxt" style="top:610px;font-size:62px;font-weight:600;color:var(--acc);padding:0 200px" id="q2">How many can you actually find again?</div>
+</div>
+
+<!-- S3b come back -->
+<div class="scene" id="s3b">
+  <div class="win" id="winb"><div class="bar"><i></i><i></i><i></i><span style="margin-left:14px">Any AI chat</span></div>
+    <div class="chat">
+      <div class="you">What should I check before flashing the board?</div>
+      <p>Before you flash it, <span class="hl" id="b1">confirm the board runs at 3.3&nbsp;V logic</span> and that the USB cable carries data, not just power. Most failed uploads come from the cable. Then <span class="hl" id="b2">hold the BOOT button while the upload starts</span> if the port is detected but the sketch will not transfer. If it still fails, <span class="hl" id="b3">check the datasheet for the strapping pins</span> before blaming the code.</p>
+    </div>
+  </div>
+  <div class="badge" id="bdgb" style="opacity:0"><svg width="18" height="18" viewBox="0 0 16 16"><path d="M2 3h12v8H7l-3 3v-3H2z" fill="#fff"/></svg></div>
+  <div class="pop" id="popb" style="left:830px;top:610px;opacity:0"><div class="q" style="border-color:#3ddc84">check the datasheet for the strapping pins</div><div class="ta">verify against the datasheet</div></div>
+  <div id="later" style="position:absolute;inset:0;background:var(--bg);display:grid;place-items:center;font-size:96px;font-weight:700;letter-spacing:-.02em"><div>3 days later<span style="color:var(--acc)">.</span></div></div>
+  <div class="cap" id="cb">Come back later. Everything is still there.<small>Highlights and comments are restored every time the chat loads.</small></div>
+</div>
+
+<!-- S-bridge second brain -->
+<div class="scene" id="sbr">
+  <div class="bigtxt" style="top:340px;font-size:84px;font-weight:700;letter-spacing:-.025em;padding:0 160px;line-height:1.12" id="br1">Your AI chats are becoming your second brain.</div>
+  <div class="bigtxt" style="top:640px;font-size:52px;font-weight:600;color:var(--acc)" id="br2">Do not let the useful parts disappear.</div>
+</div>
+
+<!-- S1 title -->
+<div class="scene" id="s1">
+  <div class="bigtxt" style="top:360px;font-size:92px;font-weight:700;letter-spacing:-.03em" id="s1a">Great answers scroll away.</div>
+  <div class="bigtxt" style="top:500px;font-size:56px;font-weight:600;color:var(--acc)" id="s1b">Keep the parts that matter.</div>
+</div>
+
+<!-- S2 highlight -->
+<div class="scene" id="s2">
+  <div class="win"><div class="bar"><i></i><i></i><i></i><span style="margin-left:14px">Any AI chat</span></div>
+    <div class="chat" id="chat">
+      <div class="you">What should I check before flashing the board?</div>
+      <p id="para">Before you flash it, <span class="hl" id="h1">confirm the board runs at 3.3&nbsp;V logic</span> and that the USB cable carries data, not just power. Most failed uploads come from the cable. Then <span class="hl" id="h2">hold the BOOT button while the upload starts</span> if the port is detected but the sketch will not transfer. If it still fails, <span class="hl" id="h3">check the datasheet for the strapping pins</span> before blaming the code.</p>
+    </div>
+  </div>
+  <div class="tb" id="tb" style="opacity:0"><div class="dot" style="background:#ffd500"></div><div class="dot" style="background:#3ddc84"></div><div class="dot" style="background:#4da3ff"></div><div class="dot" style="background:#ff6fb5"></div></div>
+  <div class="kbd" id="kb" style="opacity:0;left:1030px;top:690px"><div class="key" id="k3">3</div></div>
+  <div class="cap" id="c2">Select. Press 1 to 4.<small>Highlights stay in the chat, permanently.</small></div>
+</div>
+
+<!-- S3 comment -->
+<div class="scene" id="s3">
+  <div class="win"><div class="bar"><i></i><i></i><i></i><span style="margin-left:14px">Any AI chat</span></div>
+    <div class="chat">
+      <div class="you">What should I check before flashing the board?</div>
+      <p>Before you flash it, <span class="hl" style="background:rgba(255,213,0,.42)">confirm the board runs at 3.3&nbsp;V logic</span> and that the USB cable carries data, not just power. Most failed uploads come from the cable. Then <span class="hl" style="background:rgba(77,163,255,.42)">hold the BOOT button while the upload starts</span> if the port is detected but the sketch will not transfer. If it still fails, <span class="hl" id="h3b" style="background:rgba(61,220,132,.42)">check the datasheet for the strapping pins</span> before blaming the code.</p>
+    </div>
+  </div>
+  <div class="badge" id="bdg" style="left:1500px;top:553px;opacity:0"><svg width="18" height="18" viewBox="0 0 16 16"><path d="M2 3h12v8H7l-3 3v-3H2z" fill="#fff"/></svg></div>
+  <div class="pop" id="pop" style="left:830px;top:600px;opacity:0"><div class="q" style="border-color:#3ddc84">check the datasheet for the strapping pins</div><div class="ta" id="ta"></div></div>
+  <div class="cap">Add a comment to any highlight.<small>It is saved with the highlight.</small></div>
+</div>
+
+<!-- S4 outline -->
+<div class="scene" id="s4">
+  <div class="win" style="left:150px;width:1100px"><div class="bar"><i></i><i></i><i></i><span style="margin-left:14px">Any AI chat</span></div>
+    <div class="chat" style="font-size:27px">
+      <div class="you">What should I check before flashing the board?</div>
+      <p id="p4">Before you flash it, <span class="hl" id="a1" style="background:rgba(255,213,0,.42)">confirm the board runs at 3.3&nbsp;V logic</span> and that the USB cable carries data, not just power. Most failed uploads come from the cable. Then <span class="hl" id="a2" style="background:rgba(77,163,255,.42)">hold the BOOT button while the upload starts</span> if the port is detected but the sketch will not transfer. If it still fails, <span class="hl" id="a3" style="background:rgba(61,220,132,.42)">check the datasheet for the strapping pins</span> before blaming the code.</p>
+    </div>
+  </div>
+  <div class="panel" id="pn">
+    <h4>Highlights · 3</h4>
+    <div class="item" id="i1"><b style="background:#ffd500"></b>confirm the board runs at 3.3 V logic</div>
+    <div class="item" id="i2"><b style="background:#4da3ff"></b>hold the BOOT button while the upload starts</div>
+    <div class="item" id="i3"><b style="background:#3ddc84"></b><div>check the datasheet for the strapping pins<div style="color:var(--mut);font-size:20px;margin-top:6px">verify against the datasheet</div></div></div>
+  </div>
+  <div class="kbd" id="kb4" style="left:430px;top:650px;opacity:0"><div class="key">Alt</div><div class="key">↓</div></div>
+  <div class="cap">Jump between highlights with the keyboard.<small>Alt + ↓ / ↑ · outline panel · everything works without the mouse</small></div>
+</div>
+
+<!-- S5 library -->
+<div class="scene" id="s5">
+  <div class="lib">
+    <div class="rail"><div class="sel"><span>All chats</span><span>24</span></div><div><span>Claude</span><span>15</span></div><div><span>ChatGPT</span><span>9</span></div><div><span>★ Starred</span><span>4</span></div><div style="margin-top:20px;color:var(--mut)">Tags</div><div><span>#esp32</span><span>6</span></div><div><span>#thesis</span><span>9</span></div></div>
+    <div class="main">
+      <div class="search"><span id="srch"></span><span id="caret" style="width:2px;height:32px;background:var(--acc);margin-left:3px"></span></div>
+      <div class="card" id="cd1"><h5>ESP32 upload problems <span class="pill">Claude</span><span class="pill">#esp32</span></h5><p style="border-color:#3ddc84">check the datasheet for the strapping pins</p></div>
+      <div class="card" id="cd2"><h5>Sleep and memory consolidation <span class="pill">ChatGPT</span><span class="pill">#thesis</span></h5><p style="border-color:#4da3ff">consolidation is strongest in slow-wave sleep</p></div>
+      <div class="card" id="cd3"><h5>Postgres index choices <span class="pill">Claude</span></h5><p style="border-color:#ffd500">a partial index only helps when the filter matches</p></div>
+      <div class="card" id="cd4"><h5>Tax residency rules <span class="pill">ChatGPT</span><span class="pill">★</span></h5><p style="border-color:#ff6fb5">check the 183-day rule for each country</p></div>
+    </div>
+  </div>
+  <div class="cap">A searchable, annotated knowledge base.<small>Claude and ChatGPT chats together · tags · stars · colour names</small></div>
+</div>
+
+<!-- S6 share -->
+<div class="scene" id="s6">
+  <div class="share">
+    <div class="top"><b>Shared chat</b><span><span class="sw" id="sw1"></span>Highlights</span><span><span class="sw" id="sw2"></span>Comments</span><span style="margin-left:auto;display:flex;gap:12px"><span style="border:1px solid #cfc9bc;border-radius:999px;padding:6px 18px" id="go1">Continue in Claude</span><span style="border:1px solid #cfc9bc;border-radius:999px;padding:6px 18px">Continue in ChatGPT</span></span></div>
+    <div class="body"><p style="background:#eee9df;display:inline-block;padding:10px 20px;border-radius:14px;font-size:24px;margin-bottom:26px">What should I check before flashing the board?</p>
+    <p>Before you flash it, <span class="hl" id="sh1" style="background:rgba(255,213,0,.55)">confirm the board runs at 3.3&nbsp;V logic</span> and that the USB cable carries data, not just power. Then <span class="hl" id="sh2" style="background:rgba(77,163,255,.5)">hold the BOOT button while the upload starts</span>. If it still fails, <span class="hl" id="sh3" style="background:rgba(61,220,132,.5)">check the datasheet for the strapping pins</span><span id="shn" style="display:inline-block;background:#c96442;color:#fff;border-radius:50%;width:30px;height:30px;font-size:17px;text-align:center;line-height:30px;margin-left:8px;vertical-align:middle">1</span>.</p></div>
+  </div>
+  <div class="cap">Share it, or continue it anywhere.<small>One file with your highlights and comments. Continue the chat in Claude or ChatGPT in one click.</small></div>
+</div>
+
+<!-- S7 safe -->
+<div class="scene" id="s7">
+  <div class="bigtxt" style="top:250px;font-size:84px;font-weight:700;letter-spacing:-.02em">Yours. On your device.</div>
+  <div class="bigtxt" style="top:390px;font-size:38px;color:var(--mut)">No account. No tracking. No servers.</div>
+  <div id="bk" style="position:absolute;left:560px;top:520px;width:800px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px 32px;font-size:26px;box-shadow:0 20px 60px rgba(0,0,0,.5)">
+    <div style="color:var(--mut);font-size:21px;margin-bottom:10px">Downloads / Tessel backups</div>
+    <div style="margin-bottom:8px">📄 highlights-backup-latest.json</div><div>📄 highlights-backup-tue.json</div>
+  </div>
+  <div class="cap">Your second brain stays yours.<small>Stored on your device. Optional automatic backups survive reinstalls.</small></div>
+</div>
+
+<!-- S8 end -->
+<div class="scene" id="s8">
+  <div class="bigtxt" style="top:340px;font-size:110px;font-weight:800;letter-spacing:-.03em" id="nm"></div>
+  <div class="bigtxt" style="top:500px;font-size:40px;color:var(--acc);font-weight:600;padding:0 120px">Turn your AI chats into a searchable, annotated knowledge base.</div>
+  <div class="bigtxt" style="top:610px;font-size:30px;color:var(--mut)">Chrome · Edge · Firefox · Brave</div>
+  <div class="bigtxt" style="top:960px;font-size:21px;color:#7d786f">Works with claude.ai and chatgpt.com. Independent project, not affiliated with or endorsed by Anthropic or OpenAI.</div>
+</div>
+
+<svg class="cursor" id="cur" viewBox="0 0 24 24" style="opacity:0"><path d="M3 2l7 19 3-8 8-3z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>
+</div>
+<script>
+const NAME = new URLSearchParams(location.search).get('name') || 'Tessel';
+document.getElementById('nm').textContent = NAME;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const ease = (x) => 1 - Math.pow(1 - x, 3);
+const lerp = (a, b, x) => a + (b - a) * x;
+const SC = [[0, 8, 's0'], [8, 16.5, 's2'], [16.5, 22.5, 's3'], [22.5, 29.5, 's3b'], [29.5, 34, 'sbr'], [34, 41, 's5'], [41, 47, 's6'], [47, 52, 's7'], [52, 56, 's8']];
+const TOTAL = 56;
+function cur(show, x, y) { const c = $('cur'); c.style.opacity = show; c.style.left = x + 'px'; c.style.top = y + 'px'; }
+function path(t, pts) { // pts: [t, x, y]
+  if (t <= pts[0][0]) return pts[0].slice(1);
+  for (let i = 1; i < pts.length; i++) if (t <= pts[i][0]) { const a = pts[i - 1], b = pts[i], k = ease(seg(t, a[0], b[0])); return [lerp(a[1], b[1], k), lerp(a[2], b[2], k)]; }
+  return pts[pts.length - 1].slice(1);
+}
+window.TOTAL = TOTAL;
+window.setT = function (t) {
+  for (const [a, b, id] of SC) {
+    const el = $(id); const fin = seg(t, a, a + 0.5), fout = 1 - seg(t, b - 0.5, b);
+    el.style.opacity = t >= a && t < b ? Math.min(fin, fout) : 0;
+  }
+  cur(0, 0, 0);
+  // S1
+  { const l = t - 0; $('s1a').style.opacity = ease(seg(l, 0.2, 1.1)); $('s1a').style.transform = `translateY(${(1 - ease(seg(l, 0.2, 1.1))) * 24}px)`;
+    $('s1b').style.opacity = ease(seg(l, 1.8, 2.7)); $('s1b').style.transform = `translateY(${(1 - ease(seg(l, 1.8, 2.7))) * 24}px)`; }
+  // S2
+  if (t >= 8 && t < 16.5) {
+    const l = t - 8;
+    const h1 = $('h1'), h2 = $('h2'), h3 = $('h3');
+    const rect = (el) => el.getBoundingClientRect();
+    const r1 = rect(h1), r2 = rect(h2);
+    // selection of h1 from 1.0 to 2.2, toolbar 2.4, yellow applied at 3.4
+    const selOn = l > 1.0 && l < 3.4, applied1 = l >= 3.4;
+    h1.style.background = applied1 ? 'rgba(255,213,0,.42)' : selOn ? `linear-gradient(90deg,rgba(80,140,255,.55) ${ease(seg(l, 1.0, 2.2)) * 100}%,transparent 0)` : 'transparent';
+    const selOn2 = l > 5.0 && l < 6.9, applied2 = l >= 6.9;
+    h2.style.background = applied2 ? 'rgba(77,163,255,.42)' : selOn2 ? `linear-gradient(90deg,rgba(80,140,255,.55) ${ease(seg(l, 5.0, 6.3)) * 100}%,transparent 0)` : 'transparent';
+    h3.style.background = 'transparent';
+    const tb = $('tb');
+    tb.style.opacity = (l > 2.3 && l < 3.4) ? ease(seg(l, 2.3, 2.6)) : 0;
+    tb.style.left = r1.left + 'px'; tb.style.top = (r1.top - 74) + 'px';
+    const kb = $('kb'); kb.style.opacity = l > 6.2 && l < 7.8 ? 1 : 0;
+    $('k3').style.transform = `translateY(${l > 6.8 && l < 7.1 ? 5 : 0}px)`;
+    kb.style.left = '1010px'; kb.style.top = '740px';
+    const p = path(l, [[0.2, 900, 300], [1.0, r1.left + 4, r1.top + 22], [2.2, r1.right - 4, r1.top + 22], [3.0, r1.left + 40, r1.top - 50], [3.4, r1.left + 40, r1.top - 50], [4.6, r2.left + 4, r2.top + 22], [5.0, r2.left + 4, r2.top + 22], [6.3, r2.right - 4, r2.top + 22], [7.6, 1300, 800]]);
+    cur(l > 0.1 && l < 7.8 ? 1 : 0, p[0], p[1]);
+  }
+  // S3
+  if (t >= 16.5 && t < 22.5) {
+    const l = t - 16.5;
+    const text = 'verify against the datasheet';
+    const n = Math.floor(clamp((l - 1.8) / 2.4) * text.length);
+    $('ta').textContent = text.slice(0, n) + (l > 1.8 && l < 5 && Math.floor(l * 2) % 2 ? '|' : '');
+    $('pop').style.opacity = ease(seg(l, 0.9, 1.4));
+    $('pop').style.transform = `translateY(${(1 - ease(seg(l, 0.9, 1.4))) * 12}px)`;
+    $('bdg').style.opacity = ease(seg(l, 4.6, 5.1));
+    const r = $('h3b').getBoundingClientRect();
+    $('bdg').style.left = (r.right + 8) + 'px'; $('bdg').style.top = (r.top + (r.height - 34) / 2) + 'px';
+    const p = path(l, [[0, 900, 760], [0.9, r.left + 80, r.top + 20], [5, r.left + 80, r.top + 20]]);
+    cur(l < 1.6 ? 1 : 0, p[0], p[1]);
+  }
+  // S4
+  if (false) {
+    const l = 0;
+    const step = l < 1.8 ? 0 : l < 3 ? 1 : l < 4.2 ? 2 : 3;
+    $('kb4').style.opacity = l > 1.4 ? 1 : 0;
+    ['i1', 'i2', 'i3'].forEach((id, i) => $(id).classList.toggle('on', step === i + 1));
+    [['a1', '255,213,0'], ['a2', '77,163,255'], ['a3', '61,220,132']].forEach(([id, c], i) => {
+      $(id).style.boxShadow = step === i + 1 ? `0 0 0 4px rgba(${c},.9)` : 'none';
+    });
+    $('pn').style.opacity = ease(seg(l, 0.2, 0.8)); $('pn').style.transform = `translateX(${(1 - ease(seg(l, 0.2, 0.8))) * 60}px)`;
+  }
+  // S5
+  if (t >= 34 && t < 41) {
+    const l = t - 34;
+    const q = 'datasheet';
+    const n = Math.floor(clamp((l - 1) / 1.3) * q.length);
+    $('srch').textContent = q.slice(0, n);
+    $('caret').style.opacity = Math.floor(l * 2) % 2 ? 0 : 1;
+    const filtered = n >= q.length;
+    ['cd2', 'cd3', 'cd4'].forEach((id) => { const e = $(id); const k = filtered ? ease(seg(l, 2.4, 3)) : 0; e.style.opacity = 1 - k; e.style.transform = `translateX(${k * 30}px)`; });
+    $('cd1').style.transform = `translateY(${filtered ? -0 : 0}px)`;
+    $('cd1').style.boxShadow = filtered ? '0 0 0 3px rgba(201,100,66,.8)' : 'none';
+  }
+  // S6
+  if (t >= 41 && t < 47) {
+    const l = t - 41;
+    const off = l > 2.2;
+    $('sw1').classList.toggle('off', l > 2.2 && l < 4);
+    $('sw2').classList.toggle('off', l > 3.2);
+    const hlOn = !(l > 2.4 && l < 4);
+    [['sh1', '255,213,0,.55'], ['sh2', '77,163,255,.5'], ['sh3', '61,220,132,.5']].forEach(([id, c]) => { $(id).style.background = hlOn ? `rgba(${c})` : 'transparent'; });
+    $('shn').style.display = l > 3.2 ? 'none' : 'inline-block';
+  }
+  // S7
+  if (t >= 47 && t < 52) {
+    const l = t - 47;
+    $('bk').style.opacity = ease(seg(l, 0.8, 1.5)); $('bk').style.transform = `translateY(${(1 - ease(seg(l, 0.8, 1.5))) * 20}px)`;
+  }
+
+  // S0: problem. Chat titles drift upward behind the question.
+  if (t < 8) {
+    const box = $('titles');
+    if (!box.childNodes.length) {
+      const T = ['ESP32 upload problems','Sleep and memory','Postgres index choices','Tax residency rules','Resume rewrite','Kubernetes probes','Thesis outline ideas','Regex for log lines','Trip to Lisbon','Pricing page copy','Python async patterns','Contract clause review','Meal prep plan','Chart colour advice','Interview prep','Bike gear ratios','SQL window functions','Grant proposal draft'];
+      for (let i = 0; i < 36; i++) { const d = document.createElement('div'); d.textContent = T[i % T.length]; d.style.cssText = `position:absolute;left:${(i % 4) * 25 + 3}%;font-size:26px;color:#8f8a80;white-space:nowrap`; d.dataset.i = i; box.appendChild(d); }
+    }
+    [...box.children].forEach((d) => { const i = +d.dataset.i; const y = ((i * 97 + 1200 - t * 70) % 1300) - 100; d.style.top = y + 'px'; });
+    $('q1').style.opacity = ease(seg(t, 0.3, 1.2)); $('q1').style.transform = `translateY(${(1 - ease(seg(t, 0.3, 1.2))) * 22}px)`;
+    $('q2').style.opacity = ease(seg(t, 3.2, 4.2)); $('q2').style.transform = `translateY(${(1 - ease(seg(t, 3.2, 4.2))) * 22}px)`;
+  }
+  // S3b: three days later, the highlights and the comment are still there.
+  if (t >= 22.5 && t < 29.5) {
+    const l = t - 22.5;
+    $('later').style.opacity = 1 - ease(seg(l, 1.4, 2.0));
+    $('later').style.pointerEvents = 'none';
+    [['b1', '255,213,0', 2.3], ['b2', '77,163,255', 2.7], ['b3', '61,220,132', 3.1]].forEach(([id, c, at]) => { $(id).style.background = `rgba(${c},${0.42 * ease(seg(l, at, at + 0.4))})`; });
+    const r = $('b3').getBoundingClientRect();
+    $('bdgb').style.left = (r.right + 8) + 'px'; $('bdgb').style.top = (r.top + (r.height - 34) / 2) + 'px';
+    $('bdgb').style.opacity = ease(seg(l, 3.6, 4.0));
+    $('popb').style.opacity = ease(seg(l, 4.6, 5.1)); $('popb').style.transform = `translateY(${(1 - ease(seg(l, 4.6, 5.1))) * 12}px)`;
+    const p = path(l, [[3.8, 1100, 800], [4.5, r.left + 90, r.top + 20]]);
+    cur(l > 3.8 && l < 5.2 ? 1 : 0, p[0], p[1]);
+  }
+  // Bridge
+  if (t >= 29.5 && t < 34) {
+    const l = t - 29.5;
+    $('br1').style.opacity = ease(seg(l, 0.2, 1)); $('br1').style.transform = `translateY(${(1 - ease(seg(l, 0.2, 1))) * 22}px)`;
+    $('br2').style.opacity = ease(seg(l, 1.9, 2.7)); $('br2').style.transform = `translateY(${(1 - ease(seg(l, 1.9, 2.7))) * 22}px)`;
+  }
+};
+setT(0);
+</script></body></html>

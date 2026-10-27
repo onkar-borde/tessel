@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.zip
+.DS_Store
+video/*.mp4
+
+# Raw videos are published via GitHub uploads / release assets, not git
+docs/media/*.mp4

@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tessel intro</title>
+<link rel="stylesheet" href="stage.css"></head>
+<body><div id="root"></div>
+<script src="rects.js"></script><script src="stage.js"></script><script src="scenes.js"></script>
+<script>
+const cz = (name, i, s) => (Wd) => { const b = box(name, Wd, i); return { s, x: b.x + b.w / 2, y: b.y + b.h / 2 }; };
+const full = (Wd, Hd) => ({ s: 1, x: Wd / 2, y: Hd / 2 });
+const S = [];
+const add = (id, a, b, sc) => S.push({ id, a, b, ...sc });
+add('s1', 0, 8, Scenes.problem('s1'));
+add('s2', 8, 15, Scenes.longchats('s2'));
+add('s3', 15, 32, Scenes.chatDemo('s3'));
+add('s4', 32, 39, Scenes.colours('s4'));
+add('s5', 39, 47, Scenes.shot('s5', { img: 'chat-panel.png', vw: 1440, vh: 900, H: 800,
+  from: full, steps: [{ a: 1.2, b: 2.6, to: cz('chat-panel', null, 1.9) }, { a: 5.5, b: 6.8, to: full }],
+  rings: [0, 1, 2, 3].map((i) => ({ name: 'chat-panel-items', i, a: 2.8 + i * 0.7, b: 3.6 + i * 0.7 })),
+  keys: [{ label: ['Alt', '↓'], a: 2.6, b: 5.2 }], keyTop: 730,
+  cap: ['Every highlight in one panel.', 'Jump between them with Alt + arrows.'] }));
+add('s6', 47, 53, Scenes.later('s6'));
+add('s7', 53, 61, Scenes.shot('s7', { img: 'library.png', vw: 1360, vh: 860, H: 800,
+  from: full, steps: [{ a: 1, b: 2.2, to: cz('lib-q', null, 1.6) }, { a: 5.2, b: 6.4, to: full }],
+  rings: [{ name: 'lib-q', i: null, a: 1.6, b: 5 }],
+  cap: ['Your whole library, searchable.', 'Every highlight and comment, across every chat.'] }));
+add('s8', 61, 69, Scenes.shot('s8', { img: 'export.png', vw: 1200, vh: 800, H: 800,
+  from: full, steps: [{ a: 1, b: 2.2, to: cz('export-bar', null, 1.5) }, { a: 5.4, b: 6.6, to: full }],
+  rings: [{ name: 'export-toggles', i: null, a: 2.2, b: 4.2 }, { name: 'export-go', i: null, a: 3.8, b: 6 }],
+  cap: ['Share it as one HTML page.', 'Highlights and comments included. Continue it in Claude or ChatGPT.'] }));
+add('s9', 69, 76, Scenes.shot('s9', { img: 'library-settings.png', vw: 1360, vh: 860, H: 800,
+  from: full, steps: [{ a: 1, b: 2.2, to: cz('set-auto', null, 1.6) }, { a: 5, b: 6.2, to: full }],
+  rings: [{ name: 'set-auto', i: null, a: 1.8, b: 6 }],
+  cap: ['Backed up automatically.', 'A plain JSON file in your Downloads. Nothing leaves your machine.'] }));
+add('s10', 76, 83, Scenes.who('s10'));
+add('s11', 83, 91, Scenes.end('s11'));
+document.getElementById('root').innerHTML = S.map((s) => `<div class="scene" id="${s.id}">${s.html}</div>`).join('') + CURSOR_SVG;
+makeRunner(S);
+window.setT(0);
+</script></body></html>

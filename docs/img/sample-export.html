@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Sleep and memory consolidation: a literature review</title><style>
+:root{color-scheme:light dark;--bg:#faf9f5;--fg:#1f1e1d;--mut:#6b6862;--bd:#e3dfd6;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#262624;--fg:#ece9e2;--mut:#a09c94;--bd:#44423d;--card:#30302e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 Georgia,'Times New Roman',serif}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:10px 20px;background:var(--card);border-bottom:1px solid var(--bd);font:13px system-ui,sans-serif}
+.bar h1{font-size:14px;margin:0;flex:1 1 200px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.legend{display:flex;gap:12px;flex-wrap:wrap}
+.lg{display:inline-flex;gap:5px;align-items:center}
+.lg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.lg i[data-hl="yellow"]{background:rgba(255,213,0,.75)}
+.lg i[data-hl="green"]{background:rgba(61,220,132,.7)}
+.lg i[data-hl="blue"]{background:rgba(77,163,255,.7)}
+.lg i[data-hl="pink"]{background:rgba(255,111,181,.7)}
+body.no-hl .legend{display:none}
+.bar label{display:flex;gap:6px;align-items:center;cursor:pointer}
+main{max-width:760px;margin:0 auto;padding:24px 20px 60px}
+main pre{overflow:auto;padding:12px;border:1px solid var(--bd);border-radius:8px;background:var(--card);font:13px/1.5 ui-monospace,Menlo,Consolas,monospace}
+main code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em}
+main table{border-collapse:collapse;display:block;overflow:auto}
+main th,main td{border:1px solid var(--bd);padding:6px 10px}
+main blockquote{margin:1em 0;padding-left:14px;border-left:3px solid var(--bd);color:var(--mut)}
+main img{max-width:100%}
+[data-hfc-role]{margin:20px 0;padding:14px 18px;border-radius:12px;border:1px solid var(--bd)}
+[data-hfc-role]::before{display:block;font:600 11px system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+[data-hfc-role="user"]{background:var(--card)}
+[data-hfc-role="user"]::before{content:"You"}
+[data-hfc-role="claude"]::before{content:"Claude"}
+mark{color:inherit;border-radius:3px;padding:0 1px}
+mark[data-hl="yellow"]{background:rgba(255,213,0,.45)}
+mark[data-hl="green"]{background:rgba(61,220,132,.40)}
+mark[data-hl="blue"]{background:rgba(77,163,255,.40)}
+mark[data-hl="pink"]{background:rgba(255,111,181,.40)}
+mark[data-hl="none"]{background:transparent}
+body.no-hl mark{background:transparent!important}
+sup[data-comment]{position:relative;display:inline-block;min-width:16px;height:16px;padding:0 4px;margin-left:2px;border-radius:8px;background:#c96442;color:#fff;font:600 10px/16px system-ui,sans-serif;text-align:center;cursor:help;vertical-align:super}
+sup[data-comment]:hover::after{content:attr(data-comment);position:absolute;left:0;top:100%;z-index:10;width:max-content;max-width:280px;padding:8px 10px;border-radius:8px;background:#1f1e1d;color:#fff;font:400 12.5px/1.45 system-ui,sans-serif;white-space:pre-wrap;text-align:left}
+body.no-cm sup[data-comment],body.no-cm aside.comments{display:none}
+aside.comments{max-width:760px;margin:0 auto;padding:0 20px 60px;font:14px/1.5 system-ui,sans-serif}
+aside.comments h2{font-size:15px}
+aside.comments li{margin:0 0 14px}
+aside.comments blockquote{margin:0 0 4px;font-size:13px}
+aside.comments p{margin:0;white-space:pre-wrap}
+a.go,button.go{text-decoration:none;border:1px solid var(--bd);background:transparent;color:inherit;border-radius:999px;padding:4px 12px;font:inherit;cursor:pointer}
+a.go:hover,button.go:hover{background:var(--bd)}
+#go-msg{color:var(--mut)}
+footer{text-align:center;color:var(--mut);font:12px system-ui,sans-serif;padding:0 0 32px}
+</style></head><body><div class="bar"><h1>Sleep and memory consolidation: a literature review</h1><div class="legend"><span class="lg"><i data-hl="yellow"></i>Claim</span><span class="lg"><i data-hl="green"></i>Evidence</span><span class="lg"><i data-hl="blue"></i>Term</span><span class="lg"><i data-hl="pink"></i>To check</span></div><label><input type="checkbox" id="t-hl" checked> Highlights</label><label><input type="checkbox" id="t-cm" checked> Comments</label><button class="go" type="button" data-go="https://claude.ai/new?q=">Continue in Claude</button><button class="go" type="button" data-go="https://chatgpt.com/?q=">Continue in ChatGPT</button><span id="go-msg"></span></div><main><div>
+<div data-hfc-role="user"><p>What does the evidence say about sleep and memory consolidation?</p></div>
+<div data-hfc-role="claude">
+<p>The evidence is strongest for a division of labour between sleep stages. <span><mark data-hl="green">Slow-wave sleep supports declarative memory consolidation</mark><sup data-comment="Core claim for section 2">1</sup></span>, while REM sleep appears more important for procedural and emotional memory.</p>
+<h3>Effect sizes</h3>
+<p>A recent meta-analysis found <span><mark data-hl="yellow">effect size d = 0.62 across 14 studies</mark><sup data-comment="check the confidence interval">2</sup></span> comparing sleep with wake after learning, with moderate heterogeneity between paradigms.</p>
+<h3>Mechanisms</h3>
+<p>Coupling between slow oscillations and spindles is the leading account. Higher <span><mark data-hl="blue">sleep spindle density</mark></span> after learning predicts better retention the next day, although <span><mark data-hl="pink">one large study did not replicate</mark></span> the association in older adults.</p>
+<p>Open questions remain about causality: most human data are correlational, and <span>targeted memory reactivation during sleep</span> is the most promising causal tool.</p>
+</div></div></main><aside class="comments"><h2>Comments</h2><ol><li value="1"><blockquote>Slow-wave sleep supports declarative memory consolidation</blockquote><p>Core claim for section 2</p></li><li value="2"><blockquote>effect size d = 0.62 across 14 studies</blockquote><p>check the confidence interval</p></li></ol></aside><footer>Exported 2026-10-27 with Tessel</footer><script>(function(){var b=document.body;[['t-hl','no-hl'],['t-cm','no-cm']].forEach(function(p){var el=document.getElementById(p[0]);if(!el)return;el.addEventListener('change',function(){b.classList.toggle(p[1],!el.checked);});});})();</script><script type="application/json" id="hfc-transcript">"Below is an earlier conversation (\"Sleep and memory consolidation: a literature review\"). My own notes on parts of it are at the end. Please read it and continue helping me from where it left off.\n\n=== CONVERSATION ===\nMe:\nWhat does the evidence say about sleep and memory consolidation?\n\nAssistant:\nThe evidence is strongest for a division of labour between sleep stages. Slow-wave sleep supports declarative memory consolidation, while REM sleep appears more important for procedural and emotional memory.\n\nEffect sizes\n\nA recent meta-analysis found effect size d = 0.62 across 14 studies comparing sleep with wake after learning, with moderate heterogeneity between paradigms.\n\nMechanisms\n\nCoupling between slow oscillations and spindles is the leading account. Higher sleep spindle density after learning predicts better retention the next day, although one large study did not replicate the association in older adults.\n\nOpen questions remain about causality: most human data are correlational, and targeted memory reactivation during sleep is the most promising causal tool.\n\n=== MY NOTES ===\n- \"Slow-wave sleep supports declarative memory consolidation\": Core claim for section 2\n- \"effect size d = 0.62 across 14 studies\": check the confidence interval\n"</script><script>(function(){var el=document.getElementById('hfc-transcript');if(!el)return;var txt=JSON.parse(el.textContent);var msg=document.getElementById('go-msg');function copy(){try{var a=document.createElement('textarea');a.value=txt;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();}catch(e){}try{navigator.clipboard.writeText(txt);}catch(e){}}document.querySelectorAll('button[data-go]').forEach(function(b){b.addEventListener('click',function(){copy();var small=txt.length<=6000;var q=small?txt:'An earlier conversation is on my clipboard. I will paste it below this line.\n\n';window.open(b.getAttribute('data-go')+encodeURIComponent(q),'_blank','noopener');msg.textContent=small?'Opened. The text is also copied, in case it did not fill in.':'Copied. Paste it (Ctrl/Cmd+V) into the new chat.';});});})();</script></body></html>

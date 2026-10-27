@@ -1,0 +1,36 @@
+{
+  "name": "tessel",
+  "version": "0.8.0",
+  "private": true,
+  "description": "Persistent highlights and comments for Claude and ChatGPT chats (browser extension).",
+  "author": "Onkar Borde",
+  "license": "MIT",
+  "homepage": "https://github.com/onkar-borde/tessel#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onkar-borde/tessel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/onkar-borde/tessel/issues"
+  },
+  "keywords": [
+    "browser-extension",
+    "chrome-extension",
+    "firefox-addon",
+    "claude",
+    "chatgpt",
+    "highlighter",
+    "annotations"
+  ],
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "test:e2e": "node test/e2e/run-all.mjs",
+    "build": "node scripts/build.mjs",
+    "lint:firefox": "npx --yes web-ext lint --source-dir dist/firefox"
+  },
+  "devDependencies": {
+    "fflate": "^0.8.2",
+    "jsdom": "^26.0.0",
+    "puppeteer-core": "^25.16.0"
+  }
+}

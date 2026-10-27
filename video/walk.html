@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tessel walkthrough</title>
+<link rel="stylesheet" href="stage.css">
+<style>.chap{position:absolute;left:60px;top:34px;font:600 26px system-ui,sans-serif;color:var(--mut);display:flex;gap:14px;align-items:center}.chap b{background:var(--acc);color:#fff;border-radius:10px;padding:4px 14px}</style></head>
+<body><div id="root"></div>
+<script src="rects.js"></script><script src="stage.js"></script><script src="scenes.js"></script>
+<script>
+const cz = (name, i, s) => (Wd) => { const b = box(name, Wd, i); return { s, x: b.x + b.w / 2, y: b.y + b.h / 2 }; };
+const full = (Wd, Hd) => ({ s: 1, x: Wd / 2, y: Hd / 2 });
+const S = []; let n = 0;
+const add = (id, a, b, sc, title) => { n += title ? 1 : 0; S.push({ id, a, b, ...sc, html: (title ? `<div class="chap"><b>${n}</b>${title}</div>` : '') + sc.html }); };
+const title = { html: `<div class="big" style="top:340px;font-size:130px;font-weight:800" id="wt-a"></div><div class="big acc" style="top:540px;font-size:46px;font-weight:600" id="wt-b"></div><div class="big mut" style="top:640px;font-size:30px;font-weight:500" id="wt-c"></div>`,
+  fn(l) { $('wt-a').textContent = NAME; reveal($('wt-a'), l, 0.1); $('wt-b').textContent = 'Feature walkthrough'; reveal($('wt-b'), l, 0.6); $('wt-c').textContent = 'Highlights, comments, library, sharing and backups in about a minute and a half'; reveal($('wt-c'), l, 1.0); } };
+let t = 0; const nx = (d) => { const a = t; t += d; return [a, t]; };
+add('w0', ...nx(5), title);
+add('w1', ...nx(17), Scenes.chatDemo('w1'), 'Highlight and comment');
+add('w2', ...nx(8), Scenes.colours('w2'), 'Colours with meaning');
+add('w3', ...nx(10), Scenes.shot('w3', { img: 'chat-panel.png', vw: 1440, vh: 900, H: 800, from: full,
+  steps: [{ a: 1.2, b: 2.6, to: cz('chat-panel', null, 1.9) }, { a: 7, b: 8.3, to: full }],
+  rings: [0, 1, 2, 3].map((i) => ({ name: 'chat-panel-items', i, a: 2.8 + i * 0.8, b: 3.8 + i * 0.8 })),
+  keys: [{ label: ['Alt', '↓'], a: 2.6, b: 6.2 }], keyTop: 730,
+  cap: ['The highlights panel.', 'Alt + Shift + L opens it. Alt + arrows jump between highlights. Enter opens one.'] }), 'Navigate your highlights');
+add('w4', ...nx(9), Scenes.shot('w4', { img: 'popup-all.png', vw: 400, vh: 860, H: 800, from: full,
+  steps: [{ a: 1, b: 2, to: cz('popup-card', null, 1.6) }, { a: 5.6, b: 6.8, to: full }],
+  rings: [{ name: 'popup-card', i: null, a: 1.8, b: 5.5 }],
+  cap: ['The toolbar popup.', 'See this chat at a glance, export it, or open your library.'] }), 'The popup');
+add('w5', ...nx(10), Scenes.shot('w5', { img: 'library.png', vw: 1360, vh: 860, H: 800, from: full,
+  steps: [{ a: 1, b: 2.2, to: cz('lib-q', null, 1.6) }, { a: 7, b: 8.3, to: full }],
+  rings: [{ name: 'lib-q', i: null, a: 1.6, b: 3.6 }, { name: 'lib-rail', i: null, a: 4.4, b: 6.8 }],
+  cap: ['The library.', 'Search everything, filter by platform, tag or colour, export to Markdown.'] }), 'Your library');
+add('w6', ...nx(10), Scenes.shot('w6', { img: 'export.png', vw: 1200, vh: 800, H: 800, from: full,
+  steps: [{ a: 1, b: 2.2, to: cz('export-bar', null, 1.5) }, { a: 7, b: 8.3, to: full }],
+  rings: [{ name: 'export-toggles', i: null, a: 2.2, b: 4.6 }, { name: 'export-go', i: null, a: 5, b: 7 }],
+  cap: ['Export as one HTML page.', 'Toggle highlights and comments, share the file, or continue it elsewhere.'] }), 'Share a chat');
+add('w7', ...nx(9), Scenes.shot('w7', { img: 'popup-share.png', vw: 400, vh: 860, H: 800, from: full,
+  steps: [{ a: 1, b: 2, to: cz('popup-more', null, 1.3) }, { a: 6, b: 7.2, to: full }],
+  rings: [{ name: 'popup-goclaude', i: null, a: 2, b: 5.8 }],
+  cap: ['Continue in Claude or ChatGPT.', 'Opens a new chat with the conversation pasted in. Add a share link too.'] }), 'Continue elsewhere');
+add('w8', ...nx(9), Scenes.shot('w8', { img: 'library-settings.png', vw: 1360, vh: 860, H: 800, from: full,
+  steps: [{ a: 1, b: 2.2, to: cz('set-auto', null, 1.6) }, { a: 6.2, b: 7.4, to: full }],
+  rings: [{ name: 'set-auto', i: null, a: 1.8, b: 4.5 }, { name: 'set-names', i: null, a: 4.9, b: 7 }],
+  cap: ['Backups and settings.', 'Automatic backups to Downloads, colour names, and quick keys.'] }), 'Keep your data safe');
+add('w9', ...nx(7), Scenes.end('w9', { cta: 'Star the repo on GitHub' }));
+document.getElementById('root').innerHTML = S.map((s) => `<div class="scene" id="${s.id}">${s.html}</div>`).join('') + CURSOR_SVG;
+makeRunner(S); window.setT(0);
+</script></body></html>

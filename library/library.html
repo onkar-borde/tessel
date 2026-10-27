@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Library</title>
+  <link rel="stylesheet" href="../lib/ui.css">
+  <link rel="stylesheet" href="library.css">
+</head>
+<body>
+<div class="app">
+  <aside class="rail" aria-label="Filters">
+    <div class="brand"><img src="../icons/icon48.png" alt="" width="26" height="26"><span id="brand-name">Tessel</span></div>
+    <nav id="nav" aria-label="Platforms"></nav>
+    <section id="tags-wrap">
+      <h3>Tags</h3>
+      <div id="tags" class="stack"></div>
+    </section>
+    <section>
+      <h3>Colour</h3>
+      <div id="colors" class="stack"></div>
+    </section>
+    <div class="rail-foot">
+      <button id="go-settings" class="navitem" type="button"><span>Settings &amp; data</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div id="banner" class="banner" hidden></div>
+
+    <section id="view-library">
+      <header class="bar">
+        <input id="q" type="search" placeholder="Search every highlight, comment, title and tag" aria-label="Search">
+        <select id="sort" aria-label="Sort chats">
+          <option value="recent">Most recent</option>
+          <option value="count">Most highlights</option>
+          <option value="title">Title A–Z</option>
+        </select>
+        <button id="btn-export-view" class="btn" type="button" title="Download what's listed as one Markdown file">Export as Markdown</button>
+      </header>
+      <div id="summary" class="summary"></div>
+      <ul id="cards" class="cards"></ul>
+    </section>
+
+    <section id="view-settings" hidden>
+      <button id="back" class="btn small" type="button">← Library</button>
+      <h1>Settings &amp; data</h1>
+
+      <div class="block">
+        <h2>Behaviour</h2>
+        <div class="pref-row">
+          <label><input type="checkbox" id="t-hl"> Show highlights on the page</label>
+          <label><input type="checkbox" id="t-cm"> Show comment badges</label>
+          <label><input type="checkbox" id="t-tb"> Show a toolbar when I select text</label>
+          <label><input type="checkbox" id="t-qk"> Quick keys (<kbd>1</kbd>–<kbd>4</kbd>, <kbd>H</kbd>, <kbd>C</kbd>) while text is selected</label>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Colour names</h2>
+        <p class="hint">Give the four colours a meaning (for example Claim, Stat, Term, To check). Names appear in tooltips, filters, Markdown and shared pages.</p>
+        <div id="names" class="names"></div>
+        <div class="btnrow">
+          <button id="color-add" class="btn small" type="button">Add a colour</button>
+          <button id="names-reset" class="btn small" type="button">Reset names</button>
+        </div>
+        <p class="hint">Need more than four? Add up to four custom colours; they get quick keys <kbd>5</kbd>–<kbd>8</kbd>.</p>
+      </div>
+
+      <div class="block">
+        <h2>Your data</h2>
+        <p>Highlights are stored in this browser, on this device, and are never sent anywhere. They survive restarts and updates, and clearing your history or cookies does not remove them. Uninstalling the extension or removing the browser profile does, so keep a backup file: it lives outside the browser, in your Downloads folder.</p>
+        <label class="auto"><input type="checkbox" id="t-auto"> Back up automatically to my Downloads folder</label>
+        <p id="auto-status" class="hint"></p>
+        <div class="meter" aria-hidden="true"><div id="meter-fill"></div></div>
+        <p id="usage" class="hint"></p>
+        <p id="last-backup" class="hint"></p>
+        <div class="btnrow">
+          <button id="btn-backup" class="btn primary" type="button">Back up (JSON)</button>
+          <button id="btn-restore" class="btn" type="button">Restore from backup…</button>
+          <button id="btn-export-all" class="btn" type="button">Export everything as Markdown</button>
+          <input id="file" type="file" accept="application/json,.json" hidden>
+        </div>
+        <div class="btnrow danger-zone">
+          <button id="btn-wipe" class="btn danger" type="button">Delete all highlights…</button>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Keyboard</h2>
+        <table class="keys">
+          <tr><td><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd></td><td>Highlight with colour 1 to 4 (text selected); <kbd>5</kbd>–<kbd>8</kbd> are your custom colours</td></tr>
+          <tr><td><kbd>H</kbd></td><td>Highlight in the last colour you used</td></tr>
+          <tr><td><kbd>C</kbd></td><td>Highlight and add a comment</td></tr>
+          <tr><td><kbd>Alt</kbd>+<kbd>↓</kbd> / <kbd>↑</kbd></td><td>Next / previous highlight, then <kbd>Enter</kbd> to open it</td></tr>
+          <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd></td><td>Show / hide the highlights panel on the page</td></tr>
+          <tr><td><kbd>Ctrl/⌘</kbd>+<kbd>Enter</kbd></td><td>Finish a comment</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>Close the toolbar, comment box or panel</td></tr>
+          <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> / <kbd>C</kbd></td><td>Same as H / C; remap on your browser's extension-shortcuts page</td></tr>
+        </table>
+        <p class="hint">On Mac, Alt is Option. Single keys never act while you are typing in a text box.</p>
+      </div>
+      <p id="about" class="hint"></p>
+    </section>
+  </main>
+</div>
+<datalist id="tag-list"></datalist>
+<div id="toast" class="toast" hidden></div>
+<script src="../lib/sites.js"></script>
+<script src="../lib/library.js"></script>
+<script src="../lib/ui.js"></script>
+<script src="library.js"></script>
+</body>
+</html>

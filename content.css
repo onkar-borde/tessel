@@ -1,0 +1,6 @@
+/* Highlights are painted with the CSS Custom Highlight API, so the page's DOM is never touched. */
+::highlight(hfc-yellow) { background-color: rgba(255, 213, 0, 0.42); }
+::highlight(hfc-green)  { background-color: rgba(61, 220, 132, 0.38); }
+::highlight(hfc-blue)   { background-color: rgba(77, 163, 255, 0.38); }
+::highlight(hfc-pink)   { background-color: rgba(255, 111, 181, 0.38); }
+::highlight(hfc-focus)  { background-color: rgba(255, 140, 0, 0.65); }

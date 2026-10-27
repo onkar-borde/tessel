@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="../lib/ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><img src="../icons/icon48.png" alt="" width="22" height="22"><span id="brand-name">Tessel</span></div>
+    <div class="top-actions">
+      <button id="btn-library" class="btn small" type="button" title="Browse, tag and back up all your highlights">Library ↗</button>
+      <button id="btn-gear" class="btn small icon" type="button" aria-label="Settings" aria-expanded="false" title="Settings, shortcuts and diagnostics">⚙</button>
+    </div>
+  </header>
+
+  <section id="ctx" class="ctx" aria-live="polite"></section>
+
+  <nav class="tabs" role="tablist">
+    <button id="tab-chat" class="active" type="button" role="tab">This chat</button>
+    <button id="tab-all" type="button" role="tab">All chats</button>
+  </nav>
+
+  <section id="view-chat" class="view">
+    <div id="chat-note" class="note" hidden></div>
+    <input id="q" type="search" placeholder="Search highlights and comments" aria-label="Search this chat">
+    <div id="chips" class="chips"></div>
+    <ul id="list" class="list"></ul>
+    <div class="actions">
+      <div class="opts">
+        <span>Share:</span>
+        <label><input type="checkbox" id="x-hl" checked> highlights</label>
+        <label><input type="checkbox" id="x-cm" checked> comments</label>
+      </div>
+      <div class="btns">
+        <button id="btn-panel" type="button" class="btn" title="Show the highlights panel on the page (Alt+Shift+L)">Panel</button>
+        <button id="btn-md" type="button" class="btn" title="Copy this chat's highlights as Markdown">Copy MD</button>
+        <button id="btn-export" type="button" class="btn primary">Export HTML</button>
+      </div>
+    </div>
+    <details id="more" class="more">
+      <summary>Share link and continue elsewhere</summary>
+      <p class="hint">Continue this chat on another platform: the conversation is copied and a new chat opens with it filled in.</p>
+      <div class="btns wide">
+        <button id="go-claude" type="button" class="btn">Continue in Claude</button>
+        <button id="go-chatgpt" type="button" class="btn">Continue in ChatGPT</button>
+      </div>
+      <label class="fld">Link to this chat on the site (optional)
+        <input id="share-url" type="url" placeholder="Paste the link from the site's Share button" spellcheck="false">
+      </label>
+      <p class="hint">Added to your exported file as an "Open the chat" button. Only paste a link you are happy for the file's readers to use: a public link lets anyone with the file open the chat.</p>
+      <div class="btns wide"><button id="share-save" type="button" class="btn">Save link</button><button id="share-clear" type="button" class="btn">Remove</button></div>
+    </details>
+  </section>
+
+  <section id="view-all" class="view" hidden>
+    <div id="seg" class="seg" role="group" aria-label="Platform"></div>
+    <input id="allq" type="search" placeholder="Search every chat" aria-label="Search every chat">
+    <ul id="all-list" class="list"></ul>
+    <p class="hint">Tag chats, rename colours and back everything up in the <a href="#" id="lnk-library">Library</a>.</p>
+  </section>
+
+  <section id="settings" class="view settings" hidden>
+    <h2>Settings</h2>
+    <div class="pref-row">
+      <label><input type="checkbox" id="t-hl"> Show highlights</label>
+      <label><input type="checkbox" id="t-cm"> Show comment badges</label>
+      <label><input type="checkbox" id="t-tb"> Toolbar when I select text</label>
+      <label><input type="checkbox" id="t-qk"> Quick keys while text is selected</label>
+    </div>
+    <h2>Keyboard</h2>
+    <table class="keys">
+      <tr><td><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd></td><td>Highlight with colour 1 to 4</td></tr>
+      <tr><td><kbd>H</kbd></td><td>Highlight in the last colour you used</td></tr>
+      <tr><td><kbd>C</kbd></td><td>Highlight and add a comment</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>↓</kbd> / <kbd>↑</kbd></td><td>Next / previous highlight</td></tr>
+      <tr><td><kbd>Enter</kbd></td><td>Open the highlight you just jumped to</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd></td><td>Show / hide the highlights panel</td></tr>
+      <tr><td><kbd>Ctrl/⌘</kbd>+<kbd>Enter</kbd></td><td>Finish a comment</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Close the toolbar, comment box or panel</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> / <kbd>C</kbd></td><td>Same as H / C; remap on your browser's extension-shortcuts page</td></tr>
+    </table>
+    <p class="hint">Keys 1–4, H and C only act while text in the conversation is selected, and never while you are typing in a text box. On Mac, Alt is Option.</p>
+    <details class="diag">
+      <summary>Diagnostics</summary>
+      <p class="hint">What the extension sees on the current tab. Handy if highlighting doesn't work somewhere; paste it into a bug report.</p>
+      <pre id="diag-out">Open a Claude or ChatGPT tab first.</pre>
+      <button id="btn-diag" class="btn small" type="button">Copy</button>
+    </details>
+  </section>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="../lib/sites.js"></script>
+  <script src="../lib/library.js"></script>
+  <script src="../lib/ui.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
