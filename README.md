@@ -18,19 +18,14 @@ Permanent highlights and comments for Claude and ChatGPT conversations. Keyboard
 
 ## See it in action
 
-<!-- VIDEO: on github.com, edit this file and drag the intro video in here. GitHub turns it into an inline player. -->
-
-
-
-
-
-
 https://github.com/user-attachments/assets/9e063722-7f78-481d-9c87-215019b1ce26
+
+<details>
+<summary><b>Full feature walkthrough</b> (1.5 min, chapter by chapter: popup, library, sharing, continuing a chat elsewhere, backups)</summary>
 
 https://github.com/user-attachments/assets/88777f0e-7cb9-4302-aada-8811f82a5575
 
-
-
+</details>
 
 | Highlight and comment | Keyboard navigation |
 | --- | --- |

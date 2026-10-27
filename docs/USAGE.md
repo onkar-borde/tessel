@@ -94,8 +94,8 @@ Popup → ⚙ → *Diagnostics* shows what the extension sees on the page (site,
 
 | Topic | File |
 | --- | --- |
-| Overview | [Video on the project homepage](../README.md#see-it-in-action) |
-| Walkthrough of every feature | [Video on the project homepage](../README.md#see-it-in-action) |
+| Overview | [Intro video](../README.md#see-it-in-action) |
+| Walkthrough of every feature | [Watch the walkthrough](https://github.com/user-attachments/assets/88777f0e-7cb9-4302-aada-8811f82a5575) |
 | Highlight and comment | `media/highlight-comment.gif` |
 | Keyboard navigation and panel | `media/keyboard.gif` |
 | Library | `media/library.gif` |
