@@ -174,7 +174,7 @@ CHROME_PATH=/path/to/chrome npm run test:e2e   # real-browser end-to-end tests
 node scripts/media/shots.mjs                   # regenerate docs/img from the real UI
 ```
 
-Project layout, how the pieces talk to each other and how to add a site are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [CONTRIBUTING.md](CONTRIBUTING.md). For Firefox releases set `GECKO_ID=you@yourdomain` once and keep it forever: the id is what ties stored data to the extension across updates.
+Project layout, how the pieces talk to each other and how to add a site are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [CONTRIBUTING.md](CONTRIBUTING.md). The Firefox add-on id (`tessel@onkar-borde.github.io`, set in `scripts/build.mjs`) must never change: it is what ties stored data to the extension across updates. Forks should build with their own `GECKO_ID`.
 
 ## Roadmap
 

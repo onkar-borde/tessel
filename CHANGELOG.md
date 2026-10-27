@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.1
+
+- Store-ready packaging: permanent Firefox add-on id (`tessel@onkar-borde.github.io`), store name "Tessel: Highlights & Comments for Claude" (the extension itself still shows "Tessel").
+- Store screenshots and promo images in `docs/store/`, rendered by `scripts/media/store.mjs`.
+
 ## 0.8.0
 
 - Custom colours: add up to four of your own (Library, Settings), each with a name; quick keys 5 to 8. They work in the toolbar, comment box, panel, filters, Markdown, exports and backups.

@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Tessel",
-  "version": "0.8.0",
+  "name": "Tessel: Highlights & Comments for Claude",
+  "short_name": "Tessel",
+  "version": "0.8.1",
   "description": "Persistent highlights and comments for claude.ai and chatgpt.com chats, with keyboard shortcuts and a shareable HTML export.",
   "minimum_chrome_version": "105",
   "permissions": [

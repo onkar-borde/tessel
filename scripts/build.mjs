@@ -2,7 +2,7 @@
 // Builds one package per browser family into dist/ (a folder to load unpacked, plus a store-ready zip).
 //
 //   npm run build                 -> dist/chromium, dist/firefox (+ zips)
-//   GECKO_ID=you@yourdomain npm run build   -> use your own Firefox add-on id
+//   GECKO_ID=other@id npm run build         -> only for a fork; the official id must never change
 //
 // The source in the repo root is the Chromium build. Firefox differs only in the manifest:
 // it runs the background script as an event page (not a service worker) and needs an add-on id.
@@ -15,7 +15,8 @@ import { zipSync } from 'fflate';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const INCLUDE = ['background.js', 'content.js', 'content.css', 'lib', 'popup', 'library', 'icons', 'LICENSE'];
-const GECKO_ID = process.env.GECKO_ID || 'tessel@example.com';
+// The Firefox add-on id ties users' stored highlights to the extension across updates. Never change it.
+const GECKO_ID = process.env.GECKO_ID || 'tessel@onkar-borde.github.io';
 
 const base = JSON.parse(readFileSync(join(root, 'manifest.json'), 'utf8'));
 
@@ -63,7 +64,4 @@ for (const [name, transform] of Object.entries(targets)) {
   const zipPath = join(dist, `tessel-${name}-${base.version}.zip`);
   writeFileSync(zipPath, zipDir(out));
   console.log(`built ${relative(root, out)}  ->  ${relative(root, zipPath)}`);
-}
-if (!process.env.GECKO_ID) {
-  console.log('note: Firefox build uses the placeholder id ' + GECKO_ID + '. Set GECKO_ID before publishing it.');
 }

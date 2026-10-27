@@ -383,7 +383,8 @@ function renderDiag() {
 // ---------- start ----------
 async function init() {
   try {
-    $('#brand-name').textContent = ext.runtime.getManifest().name;
+    const m = ext.runtime.getManifest();
+    $('#brand-name').textContent = m.short_name || m.name;
   } catch (_) {}
   const stored = await sGet('settings');
   state.settings = { ...state.settings, ...(stored.settings || {}) };

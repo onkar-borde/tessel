@@ -498,8 +498,9 @@ function renderAll() {
 
 async function init() {
   try {
-    document.title = ext.runtime.getManifest().name + ' · Library';
-    $('#brand-name').textContent = ext.runtime.getManifest().name;
+    const m = ext.runtime.getManifest();
+    document.title = (m.short_name || m.name) + ' · Library';
+    $('#brand-name').textContent = m.short_name || m.name;
   } catch (_) {}
   await reload();
 

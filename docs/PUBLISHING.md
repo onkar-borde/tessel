@@ -7,7 +7,7 @@ Listing text, screenshots and the privacy statement are in `STORE_LISTING.md`, `
 |---|---|---|---|
 | Chrome Web Store | one-time US$5 developer fee | a Google account, 2-step verification on | the Chromium zip; screenshots 1280x800; privacy policy URL (the repo's PRIVACY.md) |
 | Microsoft Edge Add-ons | free | a Microsoft account | the same Chromium zip |
-| Firefox (AMO) | free | a Mozilla account; a real add-on id | the Firefox zip, plus the source zip if asked; build with `GECKO_ID=you@yourdomain node scripts/build.mjs` |
+| Firefox (AMO) | free | a Mozilla account; a real add-on id | the Firefox zip, plus the source zip if asked; `npm run build` already uses the permanent id `tessel@onkar-borde.github.io` |
 | Opera, Brave, Vivaldi | free / none | Opera add-ons takes the Chromium zip; Brave and Vivaldi install from the Chrome store | |
 | Safari | US$99 / year | Apple developer account, Xcode conversion | not covered here |
 

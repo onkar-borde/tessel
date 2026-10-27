@@ -1,6 +1,6 @@
 {
   "name": "tessel",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": true,
   "description": "Persistent highlights and comments for Claude and ChatGPT chats (browser extension).",
   "author": "Onkar Borde",
